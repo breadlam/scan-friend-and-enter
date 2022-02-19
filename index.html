@@ -4,28 +4,28 @@
 		<title>Scan, Friend</title>
 
 		<script>
-                        function mecard_escape(str) {
-                                str = str.replace(/\\/g, "\\\\");
-                                str = str.replace(/\"/g, "\\\"");
-                                str = str.replace(/;/g, "\\;");
-                                str = str.replace(/:/g, "\\:");
-                                str = str.replace(/,/g, "\\,");
-                                return str;
-                        }
-
-			function generateQR(divCanvas) {
-				var type = $("input:radio[name=T]:checked").val();
-				var ssid = mecard_escape($("#S").val());
-				var key = mecard_escape($("#P").val());
-
-				var code = "WIFI:" +
-					"T:" + type + ";" +
-					"S:" + ssid + ";" +
-					"P:" + key + ";" +
-					";";
-
-				divCanvas.empty().qrcode(code);
+			function mecard_escape(str) {
+				str = str.replace(/\\/g, "\\\\");
+				str = str.replace(/\"/g, "\\\"");
+				str = str.replace(/;/g, "\\;");
+				str = str.replace(/:/g, "\\:");
+				str = str.replace(/,/g, "\\,");
+				return str;
 			}
+
+function generateQR(divCanvas) {
+	var type = $("input:radio[name=T]:checked").val();
+	var ssid = mecard_escape($("#S").val());
+	var key = mecard_escape($("#P").val());
+
+	var code = "WIFI:" +
+		"T:" + type + ";" +
+		"S:" + ssid + ";" +
+		"P:" + key + ";" +
+		";";
+
+	divCanvas.empty().qrcode(code);
+}
 		</script>
 
 	</head>
@@ -35,7 +35,7 @@
 		<script type="text/javascript" src="./src/jquery.qrcode.js"></script>
 		<script type="text/javascript" src="./src/qrcode.js"></script>
 
-		<div id="details">
+		<div class='no-print' id="details">
 			<table>
 				<tr>
 					<td><label>Encryption:</label></td>
@@ -63,7 +63,7 @@
 
 		<div class="outsideWrapper">
 			<div class="insideWrapper">
-				<img src="../images/scan_friend.png" class="coveredImage">
+				<img id="gateImage" src="../images/scan_friend.png" class="coveredImage no-print">
 				<div class="coveringCanvas" id="qrcodeCanvas"></div>
 			</div>
 		</div>
@@ -71,9 +71,9 @@
 	</body>
 
 	<style type="text/css" media="screen">
-	.outsideWrapper{ 
-		width:964px; height:1334px; 
-	}
+.outsideWrapper{ 
+	width:964px; height:1334px; 
+}
 	.insideWrapper{ 
 		width:100%; 
 		height:100%; 
@@ -92,6 +92,16 @@
 		position:absolute;
 		top:0px; left:0px;
 	}
+	</style>
+
+	<style type="text/css" media="print">
+	@media print
+		{
+		.no-print, .no-print *
+		{
+			display: none !important;
+		}
+	}	
 	</style>
 
 </html>

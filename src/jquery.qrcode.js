@@ -23,8 +23,7 @@
 			qrcode.addData(options.text);
 			qrcode.make();
 
-			var moria = new Image();
-			moria.src = '../images/scan_friend.png';
+			moria = document.getElementById("gateImage");
 
 			// create canvas element
 			var canvas	= document.createElement('canvas');
@@ -34,9 +33,6 @@
 			canvas.height	= moria.height;
 			var ctx		= canvas.getContext('2d');
 
-			//moria.onload = function () {
-        		//	ctx.drawImage(moria,0,0);
-    			//};
 			ctx.drawImage(moria,0,0);
 
 			// compute tileW/tileH based on options.width/options.height
