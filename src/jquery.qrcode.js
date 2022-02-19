@@ -9,8 +9,8 @@
 		// typeNumber < 1 for automatic calculation
 		options	= $.extend( {}, {
 			render		: "canvas",
-			width		: 256,
-			height		: 256,
+			width		: 128,
+			height		: 128,
 			typeNumber	: -1,
 			correctLevel	: QRErrorCorrectLevel.H,
                         background      : "#ffffff",
@@ -27,8 +27,6 @@
 
 			// create canvas element
 			var canvas	= document.createElement('canvas');
-			//canvas.width	= options.width;
-			//canvas.height	= options.height;
 			canvas.width	= moria.width;
 			canvas.height	= moria.height;
 			var ctx		= canvas.getContext('2d');
@@ -40,8 +38,8 @@
 			var tileH	= options.height / qrcode.getModuleCount();
 
 			// draw in the canvas
-			var row_offset = 780;
-			var column_offset = 352;
+			var row_offset = 390;
+			var column_offset = 176;
 			for( var row = 0; row < qrcode.getModuleCount(); row++ ){
 				for( var col = 0; col < qrcode.getModuleCount(); col++ ){
 					ctx.fillStyle = qrcode.isDark(row, col) ? options.foreground : options.background;
@@ -50,6 +48,9 @@
 					ctx.fillRect(Math.round(col*tileW)+column_offset,Math.round(row*tileH)+row_offset, w, h);  
 				}	
 			}
+
+			ctx.scale(0.75,0.75);
+
 			// return just built canvas
 			return canvas;
 		}
